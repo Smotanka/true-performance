@@ -3,8 +3,14 @@ import React from 'react';
 import Silhouette from '../images/silhuette.svg';
 import arrow from '../images/arrow_up.svg';
 import wizard from '../images/screen_wizard.svg';
-
-
+import style from '../css/styles.module.css';
+import logo from '../images/logo_white.png'
+import logoFooter from '../images/logo_cyan.png';
+import facebook from '../images/facebook.svg';
+import instagram from '../images/instagram.svg';
+import linkedin from '../images/linkedin.svg';
+import twitter from '../images/twitter.svg';
+import pinterest from '../images/pinterest.svg';
 class Screen extends React.Component{
     constructor(props) {
         super(props);
@@ -26,22 +32,30 @@ class Screen extends React.Component{
     }
 
     silhouette(numColumns,numRows){
+
         let height=12;
+
         numColumns=Number(numColumns);
         numRows=Number(numRows);
+
         if(numColumns<5 && numRows<4 ){
             height=15;
-        }
-        else if(numRows>numColumns ){
+        }else if(numRows>numColumns ){
             height=(height/(numRows*0.5))*3;
         }else{
             height=(height/(numColumns*0.5))*3;
         }
 
+        const silhouetteStyle={
 
+            height:`${height}vmax`,
+            margin:"0",
+            top:"inherit"
+
+        }
         return(
-            <div style={{verticalAlign: "sub",height:"inherit"}}>
-                <img src={Silhouette} alt="silhouette" style={{height:`${height}vw`,margin:"0",top:"inherit"}}/>
+            <div style={style.silhouetteWrapper}>
+                <img src={Silhouette} alt="silhouette" style={silhouetteStyle}/>
             </div>
         );
     }
@@ -60,9 +74,21 @@ class Screen extends React.Component{
             width=width/(numColumns*0.5);
         }
 
+        const cabinetWrapper={
+            display:"block",
+            border: "0.025em solid",
+            height:`${width/1.8}vw`,
+            width:`${width}vw`
+        }
+        const cabinet={
+            height:`${width/1.8}vw`,
+            width:`${width}vw`,
+            boxShadow:"rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset"
+        }
+
         return (
-            <div  style={{display:"block",border: "0.025em solid", height:`${width/1.8}vw`, width:`${width}vw`}}>
-                <div style={{height:`${width/1.8}vw`,width:`${width}vw`,boxShadow:"rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset"}}>
+            <div  style={cabinetWrapper}>
+                <div style={cabinet}>
                 </div>
             </div>
         );
@@ -165,10 +191,10 @@ class Screen extends React.Component{
 
         };
     }
-    showDetails(event){
+    showDetails(){
         this.state.showD ? this.setState({showD:false}): this.setState({showD:true})
     }
-    hoverMouse(event){
+    hoverMouse(){
         this.state.hover ? this.setState({hover:false}): this.setState({hover:true})
 
     }
@@ -176,7 +202,7 @@ class Screen extends React.Component{
         const show={
 
             display:"grid",
-            background:"whitesmoke"
+            margin:"auto",
         }
         const hide={
             visibility:"hidden",
@@ -216,130 +242,166 @@ class Screen extends React.Component{
 
         return (
             <div style={{display:"grid"}}>
-                <header style={{width:"100%",padding:"2rem"}}>
-                    <img src={wizard} alt={"wizard"} style={{height:"10rem",margin:"auto"}}/>
-                </header>
+                <div style={{background:"#000033",padding:"2rem"}}>
+                    <img src={logo} alt={"logo"} style={{height:"5rem",marginLeft:"5rem"}}/>
+                </div>
+                <div className={"w3-row-padding"} style={{background:"whitesmoke",paddingBottom:"2rem"}}>
+                    <div >
+                        <header style={{width:"100%",marginRight:"auto",marginLeft:"auto",justifyContent:"center",display:"flex"}}>
+                            <img src={wizard} alt={"wizard"} style={{height:"10rem",margin:"auto"}}/>
+                        </header>
+                    </div>
+                </div>
                 <div  style={{margin:"auto"}}>
-            <div style={{display:"grid",marginBottom:"2rem"}}>
-                <div style={{display:"grid",justifyContent:"space-between",margin:"auto",padding:"1rem"}}>
-                    <h3>Cabinets</h3>
-                <label style={{display:"flex",justifyContent:"space-evenly",margin:"0.5rem"}}>
-                    <div style={{width:"50%"}}>
-                        <h5 style={{justifySelf:"center"}}>Vertically</h5>
-                    </div>
+                    <span className={"w3-center "}>
+                        <h3>Screen Wizard is tool to customize your screen to your liking. Choose how many screens you want vertically and horizontally.</h3>
+                    </span>
+                    <div style={{display:"grid",marginBottom:"2rem"}}>
 
-                    <input
-                        className="w3-input"
-                        name="columns"
-                        type="number"
-                        value={this.state.columns}
-                        onChange={this.handleInputChange}
-                        style={{width:"50%",textAlign:"center"}}
+                        <div style={{display:"grid",justifyContent:"space-between",margin:"auto",padding:"1rem"}}>
 
-                        />
-                </label>
-                <label style={{display:"flex",justifyContent:"space-evenly",margin:"0.5rem"}}>
-                    <div style={{width:"50%"}}>
-                        <h5 style={{justifySelf:"center"}}>Horizontally</h5>
-                    </div>
+                            <h1 style={{fontSize:"xxx-large"}}>Cabinets</h1>
+                            <label style={{display:"flex",justifyContent:"space-evenly",margin:"0.5rem"}}>
+                                <div style={{width:"50%"}}>
+                                    <h2 style={{justifySelf:"center"}}>Vertically</h2>
+                                </div>
+                                <input
+                                    className="w3-input"
+                                    name="columns"
+                                    type="number"
+                                    value={this.state.columns}
+                                    onChange={this.handleInputChange}
+                                    style={{width:"50%",textAlign:"center",fontSize:"2rem"}}
 
+                                />
+                            </label>
+                            <label style={{display:"flex",justifyContent:"space-evenly",margin:"0.5rem"}}>
+                                <div style={{width:"50%"}}>
+                                    <h2 style={{justifySelf:"center"}}>Horizontally</h2>
+                                </div>
+                                <input
+                                    className="w3-input"
+                                    name="rows"
+                                    type="number"
+                                    value={this.state.rows}
+                                    onChange={this.handleInputChange}
+                                    style={{width:"50%",textAlign:"center",fontSize:"2rem"}}
+                                />
+                            </label>
+                            <div  className={style.button}>
 
-                    <input
-                        className="w3-input"
-                        name="rows"
-                        type="number"
-                        value={this.state.rows}
-                        onChange={this.handleInputChange}
-                        style={{width:"50%",textAlign:"center"}}
-
-                    />
-                </label>
-                    <div  style={divStyle}  >
-                        <img  src={arrow} alt={"arrow"} style={this.state.showD ? clicked:closed} onClick={this.showDetails} />
-                    </div>
-                    <div className={this.state.showD ? "w3-animate-bottom":"w3-animate-top"} style={this.state.showD ? show : hide }  >
-                        <div className={"w3-row"}>
-                            <table className={"w3-table"}>
-                                <tr>
-                                    <th>Screen Width (m)</th>
-                                    <th>Screen Height (m)</th>
-                                    <th>Screen Width (ft)</th>
-                                    <th>Screen Height (ft)</th>
-                                    <th>Screen Width (in)</th>
-                                    <th>Screen Height (in)</th>
-                                    <th>Screen Area (m2)</th>
-                                    <th>Screen Area (ft2)</th>
-                                </tr>
-                                <tr>
-                                    <td>{this.details(this.state.columns,this.state.rows).screenWidth_m}</td>
-                                    <td>{this.details(this.state.columns,this.state.rows).screenHeight_m}</td>
-                                    <td>{this.details(this.state.columns,this.state.rows).screenWidth_ft}</td>
-                                    <td>{this.details(this.state.columns,this.state.rows).screenHeight_ft}</td>
-                                    <td>{this.details(this.state.columns,this.state.rows).screenWidth_inch}</td>
-                                    <td>{this.details(this.state.columns,this.state.rows).screenHeight_inch}</td>
-                                    <td>{this.details(this.state.columns,this.state.rows).screenArea_m2}</td>
-                                    <td>{this.details(this.state.columns,this.state.rows).screenArea_ft2}</td>
-                                </tr>
-                            </table>
-                            <hr/>
-                            <table className={"w3-table"}>
-                                <tr>
-                                    <th>Diagonal Display size (m)</th>
-                                    <th>Diagonal Display size (in)</th>
-                                    <th>Aspect ratio</th>
-                                    <th>Cabinets horizontally (pcs)</th>
-                                    <th>Cabinets vertically (pcs)</th>
-                                    <th>Total Cabinets for screen (pcs)</th>
-                                    <th>Screen Horizontal Resolution (pcs)</th>
-                                    <th>Screen Vertical Resolution (pcs)</th>
-                                </tr>
-                                <tr>
-                                    <td>{this.details(this.state.columns,this.state.rows).diagonalDisplaySize_m}</td>
-                                    <td>{this.details(this.state.columns,this.state.rows).diagonalDisplaySize_inch}</td>
-                                    <td>{this.details(this.state.columns,this.state.rows).aspectRatio_const}</td>
-                                    <td>{this.state.rows}</td>
-                                    <td>{this.state.columns}</td>
-                                    <td>{this.state.columns*this.state.rows}</td>
-                                    <td>{this.details(this.state.columns,this.state.rows).screenHorizontalResolution}</td>
-                                    <td>{this.details(this.state.columns,this.state.rows).screenVerticalResolution}</td>
-                                </tr>
-                            </table>
-                            <hr/>
-                            <table className={"w3-table"}>
-                                <tr>
-                                    <th>Screen Total Resolution (pcs)</th>
-                                </tr>
-                                <tr>
-                                    <td>{this.details(this.state.columns,this.state.rows).totalResolution}</td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <hr/>
-                <div style={{margin:"auto",padding:"1rem",width:"100vw"}}>
-                    <div style={{margin:"5rem",width:"100%",display:"flex",justifyContent:"space-evenly"}}>
-                        <div style={{display:"flex",justifyContent:"space-evenly",height:"20rem"}}>
-                            <div style={{display:"grid"}}>
-                                {this.silhouette(this.state.columns,this.state.rows)}
+                                <img  src={arrow} alt={"arrow"} style={this.state.showD ? clicked:closed} onClick={this.showDetails} />
                             </div>
-                            <div style={{width:"inherit"}} >{this.renderColumn(this.state.columns,this.state.rows)}</div>
+
+                        </div>
+                        <div className={this.state.showD ? "w3-animate-bottom ":""} style={this.state.showD ? show : hide }  >
+                            <div style={style.detailsText && style.detailsTextSmall}>
+                                <div className={"w3-row w3-content"} >
+                                    <div className={"w3-col m8 l12"}>
+                                        <table className={"w3-table w3-centered "}>
+                                            <thead>
+                                                <tr>
+                                                    <th >Screen Width (m)</th>
+                                                    <th>Screen Height (m)</th>
+                                                    <th>Screen Width (ft)</th>
+                                                    <th>Screen Height (ft)</th>
+                                                    <th>Screen Width (in)</th>
+                                                    <th>Screen Height (in)</th>
+                                                    <th>Screen Area (m2)</th>
+                                                    <th>Screen Area (ft2)</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>{this.details(this.state.columns,this.state.rows).screenWidth_m}</td>
+                                                    <td>{this.details(this.state.columns,this.state.rows).screenHeight_m}</td>
+                                                    <td>{this.details(this.state.columns,this.state.rows).screenWidth_ft}</td>
+                                                    <td>{this.details(this.state.columns,this.state.rows).screenHeight_ft}</td>
+                                                    <td>{this.details(this.state.columns,this.state.rows).screenWidth_inch}</td>
+                                                    <td>{this.details(this.state.columns,this.state.rows).screenHeight_inch}</td>
+                                                    <td>{this.details(this.state.columns,this.state.rows).screenArea_m2}</td>
+                                                    <td>{this.details(this.state.columns,this.state.rows).screenArea_ft2}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <hr style={{marginTop:"2rem"}}/>
+                                        <table className={"w3-table w3-centered"}>
+                                            <thead>
+                                                <tr>
+                                                    <th>Diagonal Display size (m)</th>
+                                                    <th>Diagonal Display size (in)</th>
+                                                    <th>Aspect ratio</th>
+                                                    <th>Cabinets horizontally (pcs)</th>
+                                                    <th>Cabinets vertically (pcs)</th>
+                                                    <th>Total Cabinets for screen (pcs)</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>{this.details(this.state.columns,this.state.rows).diagonalDisplaySize_m}</td>
+                                                    <td>{this.details(this.state.columns,this.state.rows).diagonalDisplaySize_inch}</td>
+                                                    <td>{this.details(this.state.columns,this.state.rows).aspectRatio_const}</td>
+                                                    <td>{this.state.rows}</td>
+                                                    <td>{this.state.columns}</td>
+                                                    <td>{this.state.columns*this.state.rows}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <hr style={{marginTop:"2rem"}} />
+                                        <table className={"w3-table w3-centered"}>
+                                            <thead>
+                                                <tr>
+                                                    <th>Screen Horizontal Resolution (pcs)</th>
+                                                    <th>Screen Vertical Resolution (pcs)</th>
+                                                    <th>Screen Total Resolution (pcs)</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>{this.details(this.state.columns,this.state.rows).screenHorizontalResolution}</td>
+                                                    <td>{this.details(this.state.columns,this.state.rows).screenVerticalResolution}</td>
+                                                    <td>{this.details(this.state.columns,this.state.rows).totalResolution}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <hr />
+                    <div style={{margin:"auto",padding:"1rem",width:"100vw"}}>
+                        <div style={{margin:"5rem",width:"100%",display:"flex",justifyContent:"space-evenly"}}>
+                            <div style={{display:"flex",justifyContent:"space-evenly",height:"20rem"}}>
+                                <div style={{display:"grid"}}>
+                                    {this.silhouette(this.state.columns,this.state.rows)}
+                                </div>
+                                <div style={{width:"inherit"}} >{this.renderColumn(this.state.columns,this.state.rows)}
+                                </div>
+                            </div>
                         </div>
                     </div>
-
                 </div>
-
-            </div>
-
-                </div>
-
-
-
-                <footer  style={{marginTop:"1rem",marginBottom:"0"}}>
-                    <div className={"details"} style={{display:"grid",width:"100%",height:"15rem"}}>
+                <footer style={{marginTop:"35rem"}}>
+                    <div style={{background:"whitesmoke",height:"20rem",display:"flex",justifyContent:"space-around"}}>
+                        <div style={{paddingLeft:"10vw",width:"85%",display:"grid",paddingTop:"2rem"}}>
+                            <img src={logoFooter} alt={"logo_cyan"} style={{height:"2rem"}}/>
+                            <span>Johanna-Waescher-Str. 5, 34131 Kassel, Germany</span>
+                            <span>+49 561 986 806 70</span>
+                            <span>  +421 915 788 389</span>
+                            <span>info@trueperformance.eu</span>
+                        </div>
+                        <div style={{paddingRight:"10vw",width:"15%",paddingTop:"2rem"}}>
+                            <div style={{display:"flex",justifyContent:"space-evenly"}}>
+                                <div><img src={facebook} alt={"facebook"} style={{height:"2rem"}}/></div>
+                                <div><img src={instagram} alt={"instagram"} style={{height:"2rem"}}/></div>
+                                <div><img src={linkedin} alt={"linkedin"} style={{height:"2rem"}}/></div>
+                                <div><img src={pinterest} alt={"pinterest"} style={{height:"2rem"}}/></div>
+                                <div><img src={twitter} alt={"twitter"} style={{height:"2rem"}}/></div>
+                            </div>
+                        </div>
                     </div>
                 </footer>
-
+            </div>
         </div>
         );
 

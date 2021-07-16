@@ -1,0 +1,33 @@
+.silhouette-wrapper{
+   vertical-align: sub ;
+   height: inherit;
+}
+
+.button {
+   border-radius: 50%;
+    background:whitesmoke;
+    height:7rem;
+    border:0.25rem #000033 dashed;
+    width:7rem;
+    justify-self:center;
+    margin-top:1rem;
+    margin-bottom:1rem
+}
+
+.table-cell{
+   width: 15vw;
+}
+.details-text
+{
+    display:flex;
+    justify-content:center;
+    font-size:2rem
+}
+@media only screen and (max-width: 800px) {
+    .details-text-small
+    {
+        display:flex;
+        justify-content:center;
+        font-size:1.25rem
+    }
+}
