@@ -48,15 +48,16 @@ class Screen extends React.Component{
 
         const silhouetteStyle={
 
-            height:`${height}vmax`,
+            height:`${height}vw`,
             margin:"0",
-            top:"inherit"
-
+            verticalAlign:"bottom"
         }
+
+
         return(
-            <div style={style.silhouetteWrapper}>
+
                 <img src={Silhouette} alt="silhouette" style={silhouetteStyle}/>
-            </div>
+
         );
     }
 
@@ -80,26 +81,22 @@ class Screen extends React.Component{
             height:`${width/1.8}vw`,
             width:`${width}vw`
         }
-        const cabinet={
-            height:`${width/1.8}vw`,
-            width:`${width}vw`,
-            boxShadow:"rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset"
-        }
 
         return (
-            <div  style={cabinetWrapper}>
-                <div style={cabinet}>
-                </div>
-            </div>
+            <td  style={cabinetWrapper}>
+
+            </td>
         );
     };
 
+
     renderRow(numRows,numColumns){
+
         let rows = [];
         for (let i = 0; i < numRows; i++) {
             rows.push(this.cabinet(numRows,numColumns));
         }
-        return <div style={{display:"flex"}}>{rows}</div>;
+        return <tr style={{display:"flex"}}>{rows}</tr>;
 
     }
 
@@ -124,9 +121,27 @@ class Screen extends React.Component{
     }
 
     renderColumn(numColumns,numRows){
-
         numColumns=this.cabinetControl(numColumns,numRows).columns;
         numRows=this.cabinetControl(numColumns,numRows).rows;
+        if(numRows>=100||numColumns>=100){
+            let width=10;
+
+            if(numRows>numColumns){
+                width=width/(numRows*0.5);
+
+            }else{
+                width=width/(numColumns*0.5);
+            }
+            const cabinetWrapper={
+                display:"block",
+                border: "0.025em solid",
+                height:`${(width/1.8)*numColumns}vw`,
+                width:`${(width*numRows)}vw`,
+                background:"black"
+            }
+            return <div style={cabinetWrapper}></div>;
+        }
+
         let columns=[];
         for (let i=0;i<numColumns;i++){
            columns.push(this.renderRow(numRows,numColumns));
@@ -198,6 +213,9 @@ class Screen extends React.Component{
         this.state.hover ? this.setState({hover:false}): this.setState({hover:true})
 
     }
+
+
+
     render(){
         const show={
 
@@ -227,18 +245,7 @@ class Screen extends React.Component{
             cursor:"pointer",
             transform:"rotate(180deg)"
         }
-        const divStyle={
-            borderRadius:"50%",
-            background:"whitesmoke",
-            height:"7rem",
-            border:"0.25rem #000033 dashed",
-            width:"7rem",
-            justifySelf:"center",
-            marginTop:"1rem",
-            marginBottom:"1rem"
 
-
-        }
 
         return (
             <div style={{display:"grid"}}>
@@ -369,19 +376,22 @@ class Screen extends React.Component{
                             </div>
                         </div>
                     <hr />
-                    <div style={{margin:"auto",padding:"1rem",width:"100vw"}}>
-                        <div style={{margin:"5rem",width:"100%",display:"flex",justifyContent:"space-evenly"}}>
-                            <div style={{display:"flex",justifyContent:"space-evenly",height:"20rem"}}>
-                                <div style={{display:"grid"}}>
-                                    {this.silhouette(this.state.columns,this.state.rows)}
-                                </div>
+                    <div style={{margin:"auto",padding:"1rem",width:"100vw",height:'35vh',display:"flex"}}>
+                        <div style={{width:"100%",display:"flex",marginLeft:"auto",position:"absolute",justifyContent:"center"}}>
+                            <div style={{display:"flex",position:"relative",height:"inherit",alignItems:"flex-end"}}>
+                                {this.silhouette(this.state.columns,this.state.rows)}
+                            </div>
+                            <div style={{display:"flex",justifyContent:"space-evenly",height:"inherit",}}>
+
                                 <div style={{width:"inherit"}} >{this.renderColumn(this.state.columns,this.state.rows)}
                                 </div>
                             </div>
+
                         </div>
+
                     </div>
                 </div>
-                <footer style={{marginTop:"35rem"}}>
+                <footer style={{marginTop:"5rem"}}>
                     <div style={{background:"whitesmoke",height:"20rem",display:"flex",justifyContent:"space-around"}}>
                         <div style={{paddingLeft:"10vw",width:"85%",display:"grid",paddingTop:"2rem"}}>
                             <img src={logoFooter} alt={"logo_cyan"} style={{height:"2rem"}}/>

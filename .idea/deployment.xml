@@ -12,7 +12,7 @@
       <paths name="webtech_server_2">
         <serverdata>
           <mappings>
-            <mapping local="$PROJECT_DIR$" web="/" />
+            <mapping deploy="/true_performance" local="$PROJECT_DIR$" web="/true_performance" />
           </mappings>
         </serverdata>
       </paths>
